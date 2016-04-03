@@ -57,6 +57,7 @@ class Node(object):
 
 
 if __name__ == "__main__":
+    import datetime
     # Lock screen assumed to be a 3x3 grid where each node can access
     # only the nodes immediately nearby diagonally or horizontally/veritcally
     # Graph looks as follows:
@@ -67,6 +68,7 @@ if __name__ == "__main__":
     n1 = Node("1"); n2 = Node("2"); n3 = Node("3")
     n4 = Node("4"); n5 = Node("5"); n6 = Node("6")
     n7 = Node("7"); n8 = Node("8"); n9 = Node("9")
+
 
     n1.edge_list = [n2, n4, n5]
     n2.edge_list = [n1, n3, n4, n5, n6]
@@ -80,6 +82,28 @@ if __name__ == "__main__":
 
     node_list = [n1, n2, n3, n4, n5, n6, n7, n8, n9]
 
+    time1 = datetime.datetime.now()
     num = get_num_patterns(min_length=4, max_length=9, node_list=node_list)
+    time2 = datetime.datetime.now()
+
+    print "Time Taken is ", (time2 - time1)
+    print "There are %d num patterns for the lock screen given." %num
+    print "This assumes each node can only access nodes directly adjacent"
+
+    n1.edge_list = [n2, n3, n4, n5, n6, n7, n8, n9]
+    n2.edge_list = [n1, n3, n4, n5, n6, n7, n8, n9]
+    n3.edge_list = [n1, n2, n4, n5, n6, n7, n8, n9]
+    n4.edge_list = [n1, n2, n3, n5, n6, n7, n8, n9]
+    n5.edge_list = [n1, n2, n3, n4, n6, n7, n8, n9]
+    n6.edge_list = [n1, n2, n3, n4, n5, n7, n8, n9]
+    n7.edge_list = [n1, n2, n3, n4, n5, n6, n8, n9]
+    n8.edge_list = [n1, n2, n3, n4, n5, n6, n7, n9]
+    n9.edge_list = [n1, n2, n3, n4, n5, n6, n7, n8]
+
+    time1 = datetime.datetime.now()
+    num = get_num_patterns(min_length=4, max_length=9, node_list=node_list)
+    time2 = datetime.datetime.now()
+
+    print "Time Taken is ", (time2 - time1)
     print "There are %d num patterns for the lock screen given." %num
     print "This assumes each node can only access nodes directly adjacent"
