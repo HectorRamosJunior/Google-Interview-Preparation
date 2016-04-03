@@ -10,22 +10,25 @@ https://www.careercup.com/question?id=5667564572114944
 # and decreasing for each index of the array, and finds the longest sequence
 # ending in decreasing and increasing possible by checking the previous indexes.
 def longest_alternating_subsequence(array):
-    # Initializes two lists to each index for each index in array
+    # Initializes two lists to each index in the array given
     # The first list will be for subsequences that end alternating up
     # The second list wil be for subsequences that end alternating down
     subsequence_list = [ [[], []] for x in xrange(len(array))]
 
+    # 
     for i in xrange(len(array)):
         i_list_alternating_up, i_list_alternating_down = subsequence_list[i]
 
+        # Checks the previous indexes' alternating lists and appends itself 
+        # To the longest valid alternating subsequence available
         for j in xrange(i):
             j_list_alternating_up, j_list_alternating_down = subsequence_list[j]
 
-            # Look at the altnerating down list of previous indexes
+            # Look at the altnerating down list of the current prior index
             if array[i] > array[j]:
                 if len(j_list_alternating_down) + 1 > len(i_list_alternating_up):
                     i_list_alternating_up = list(j_list_alternating_down)
-            # Look at the alternating up list of the previous indexes
+            # Look at the alternating up list of the current prior index
             elif array[i] < array[j]:
                 if len(j_list_alternating_up) + 1 > len(j_list_alternating_down):
                     i_list_alternating_down = list(j_list_alternating_up)
@@ -37,12 +40,10 @@ def longest_alternating_subsequence(array):
         subsequence_list[i][0] = i_list_alternating_up
         subsequence_list[i][1] = i_list_alternating_down
 
-
         # For possible debugging.
         print "The longest subsequences for index %d:" % i
         print "Ending alternating up: ", subsequence_list[i][0]
         print "Ending alternating down: ", subsequence_list[i][1]
-
 
     # Grabs the longest subsequence, whichever alternation it ends up
     longest_alternating = []
