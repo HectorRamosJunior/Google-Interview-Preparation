@@ -15,7 +15,8 @@ def longest_alternating_subsequence(array):
     # The second list wil be for subsequences that end alternating down
     subsequence_list = [ [[], []] for x in xrange(len(array))]
 
-    # 
+    longest_alternating_subsequence = []
+
     for i in xrange(len(array)):
         i_list_alternating_up, i_list_alternating_down = subsequence_list[i]
 
@@ -36,26 +37,23 @@ def longest_alternating_subsequence(array):
         # Append the value of i to the end of both lists
         i_list_alternating_up.append(array[i])
         i_list_alternating_down.append(array[i])
+
         # Add updated lists for i back into subsequence list
         subsequence_list[i][0] = i_list_alternating_up
         subsequence_list[i][1] = i_list_alternating_down
 
-        # For possible debugging.
-        print "The longest subsequences for index %d:" % i
-        print "Ending alternating up: ", subsequence_list[i][0]
-        print "Ending alternating down: ", subsequence_list[i][1]
+        # Update longest subsequence so far if current index is longer
+        if len(subsequence_list[i][0]) > len(longest_alternating_subsequence):
+            longest_alternating_subsequence = subsequence_list[i][0]
+        if len(subsequence_list[i][1]) > len(longest_alternating_subsequence):
+            longest_alternating_subsequence = subsequence_list[i][1]
 
-    # Grabs the longest subsequence, whichever alternation it ends up
-    longest_alternating = []
-    for subsequence in subsequence_list:
-        increased_list, decreased_list = subsequence
+        # For debugging purposes.
+        #print "The longest subsequences for index %d:" % i
+        #print "Ending alternating up: ", subsequence_list[i][0]
+        #print "Ending alternating down: ", subsequence_list[i][1]
 
-        if len(increased_list) > len(longest_alternating):
-            longest_alternating = increased_list
-        if len(decreased_list) > len(longest_alternating):
-            longest_alternating = decreased_list
-
-    return longest_alternating
+    return longest_alternating_subsequence
 
 
 if __name__ == "__main__":
