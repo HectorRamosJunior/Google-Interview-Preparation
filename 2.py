@@ -18,7 +18,7 @@ The output could be any of the following:
 1 2 3
 3 4 1
 
-5 3 4
+1 3 4
 2 3 5
 
 One kinda trivial solution is to sort the 2D matrix column wise. 
